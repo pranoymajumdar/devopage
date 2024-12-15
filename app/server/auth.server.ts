@@ -10,6 +10,7 @@ interface AuthUser {
 
 export let authenticator = new Authenticator<AuthUser>();
 
+
 const githubStrategy = new GitHubStrategy(
   {
     clientId: process.env.GITHUB_CLIENT_ID,

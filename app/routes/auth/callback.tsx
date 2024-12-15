@@ -2,7 +2,7 @@ import { redirect } from 'react-router';
 import { authenticator } from '~/server/auth.server';
 import type { Route } from './+types/callback';
 import { commitSession, getSession } from '~/server/session.server';
-import { getUser } from '~/lib/user/getUser';
+
 
 export async function loader({ request }: Route.LoaderArgs) {
   try {

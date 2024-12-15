@@ -6,7 +6,7 @@ export const sessionStorage = createCookieSessionStorage({
   cookie: {
     name: '__session', // The name of the cookie
     secure: process.env.NODE_ENV === 'production', // Ensure it's secure in production
-    secrets: [process.env.SESSION_SECRET!], // A secret for signing the cookie
+    secrets: [process.env.SESSION_SECRET], // A secret for signing the cookie
     sameSite: 'lax', // Prevent CSRF attacks
     path: '/', // Cookie is accessible across the site
     httpOnly: true, // Prevent client-side access to the cookie

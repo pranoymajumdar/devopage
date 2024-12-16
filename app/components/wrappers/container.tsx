@@ -10,5 +10,5 @@ export default function Container({
   as?: ElementType;
   children: ReactNode;
 }) {
-  return <Component className={cn(className, 'max-w-screen-2xl mx-auto max-sm:px-2 sm:px-4 md:px-6 lg:px-8')}>{children}</Component>;
+  return <Component className={cn('max-w-screen-2xl mx-auto max-sm:px-2 sm:px-4 md:px-6 lg:px-8', className)}>{children}</Component>;
 }

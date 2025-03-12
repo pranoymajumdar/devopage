@@ -1,13 +1,12 @@
 "use client";
 import React, { useState } from "react";
 import { cn } from "@/lib/utils";
-import { useTheme } from "next-themes";
 import { motion } from "framer-motion";
 import { Montserrat } from 'next/font/google';
 
 const montserrat = Montserrat({ subsets: ['latin'], weight: ['400', '500', '600', '700'] });
 
-interface LogoProps {
+type LogoProps = {
   className?: string;
   size?: "xs" | "sm" | "md" | "lg" | "xl";
   variant?: "default" | "white" | "theme";
@@ -23,7 +22,6 @@ export default function Logo({
   textSize = "md",
   withAnimation = false,
 }: LogoProps) {
-  const { theme } = useTheme();
   const [isHovered, setIsHovered] = useState(false);
 
   const sizeClasses = {
@@ -127,7 +125,7 @@ export default function Logo({
       </motion.div>
 
       {withText && (
-        <div className="flex flex-col">
+        <div className="flex-col hidden lg:flex">
           <motion.div
             initial={withAnimation ? { opacity: 0 } : false}
             animate={withAnimation ? { opacity: 1 } : false}

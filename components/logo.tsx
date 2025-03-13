@@ -2,9 +2,12 @@
 import React, { useState } from "react";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
-import { Montserrat } from 'next/font/google';
+import { Montserrat } from "next/font/google";
 
-const montserrat = Montserrat({ subsets: ['latin'], weight: ['400', '500', '600', '700'] });
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
 
 type LogoProps = {
   className?: string;
@@ -13,7 +16,7 @@ type LogoProps = {
   withText?: boolean;
   textSize?: "sm" | "md" | "lg";
   withAnimation?: boolean;
-}
+};
 
 export default function Logo({
   className,
@@ -40,14 +43,14 @@ export default function Logo({
 
   const containerVariants = {
     initial: { opacity: 0 },
-    animate: { 
+    animate: {
       opacity: 1,
-      transition: { duration: 0.3 }
-    }
+      transition: { duration: 0.3 },
+    },
   };
 
   return (
-    <div 
+    <div
       className={cn("flex items-center gap-2.5", className)}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -65,74 +68,74 @@ export default function Logo({
           className="w-full h-full"
         >
           {/* Modern square with rounded corners */}
-          <rect 
-            x="4" 
-            y="4" 
-            width="32" 
-            height="32" 
+          <rect
+            x="4"
+            y="4"
+            width="32"
+            height="32"
             rx="8"
             className="fill-muted stroke-muted-foreground/10 "
           />
-          
+
           {/* Main logo shape - stylized "D" */}
           <path
             d="M12 10H20C24.4183 10 28 13.5817 28 18V22C28 26.4183 24.4183 30 20 30H12V10Z"
-            className='fill-foreground'
+            className="fill-foreground"
           />
-          
+
           {/* Inner cutout for the "D" */}
           <path
             d="M16 16H20C21.1046 16 22 16.8954 22 18V22C22 23.1046 21.1046 24 20 24H16V16Z"
-            className='fill-muted'
+            className="fill-muted"
           />
-          
+
           {/* Accent line */}
           <motion.path
             d="M24 16H28"
-            className='stroke-foreground'
+            className="stroke-foreground"
             strokeWidth="2"
             strokeLinecap="round"
-            animate={{ 
+            animate={{
               x: isHovered ? [0, 2, 0] : 0,
-              transition: { duration: 0.5 }
+              transition: { duration: 0.5 },
             }}
           />
-          
+
           {/* Second accent line */}
           <motion.path
             d="M24 24H28"
-            className='stroke-foreground'
+            className="stroke-foreground"
             strokeWidth="2"
             strokeLinecap="round"
-            animate={{ 
+            animate={{
               x: isHovered ? [0, 2, 0] : 0,
-              transition: { duration: 0.5, delay: 0.1 }
+              transition: { duration: 0.5, delay: 0.1 },
             }}
           />
-          
+
           {/* Third accent line */}
           <motion.path
             d="M24 20H26"
-            className='stroke-foreground'
+            className="stroke-foreground"
             strokeWidth="2"
             strokeLinecap="round"
-            animate={{ 
+            animate={{
               x: isHovered ? [0, 2, 0] : 0,
-              transition: { duration: 0.5, delay: 0.2 }
+              transition: { duration: 0.5, delay: 0.2 },
             }}
           />
         </svg>
       </motion.div>
 
       {withText && (
-        <div className="flex-col hidden lg:flex">
+        <div className="flex flex-col">
           <motion.div
             initial={withAnimation ? { opacity: 0 } : false}
             animate={withAnimation ? { opacity: 1 } : false}
             transition={{ duration: 0.3 }}
             className={cn(
               textSizeClasses[textSize],
-              'text-foreground',
+              "text-foreground",
               montserrat.className,
               "font-semibold tracking-tight leading-none"
             )}

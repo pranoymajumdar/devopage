@@ -13,7 +13,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import type { ComponentType, ReactNode } from "react";
-import { UserDropdown } from "../user-dropdown";
+import { UserDropdown } from "./user-dropdown";
 
 type NavItemBase = {
   label: string;
@@ -94,7 +94,7 @@ const NavItem = ({
   );
 };
 
-const BottomNav = () => {
+export const BottomNav = () => {
   return (
     <div className="block md:hidden fixed bottom-0 left-0 right-0 border-t bg-background/80 backdrop-blur-md z-50">
       <nav className="h-20 flex items-center justify-between px-2 mx-auto max-w-md">
@@ -115,5 +115,3 @@ const BottomNav = () => {
     </div>
   );
 };
-
-export default BottomNav;

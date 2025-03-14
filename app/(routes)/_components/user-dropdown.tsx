@@ -1,3 +1,4 @@
+"use client";
 import { signOutAction } from "@/app/_actions/sign-out";
 import {
   DropdownMenu,
@@ -13,6 +14,7 @@ import {
   LucideHelpCircle,
   LucideLogOut,
 } from "lucide-react";
+import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 
 type Props = {
@@ -20,6 +22,7 @@ type Props = {
 };
 
 export const UserDropdown = ({ children }: Props) => {
+  const pathName = usePathname();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>{children}</DropdownMenuTrigger>
@@ -39,7 +42,10 @@ export const UserDropdown = ({ children }: Props) => {
           Help & Support
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="text-red-600" onSelect={signOutAction}>
+        <DropdownMenuItem
+          className="text-red-600"
+          onSelect={() => signOutAction(pathName)}
+        >
           <LucideLogOut className="mr-2 h-4 w-4" />
           Log out
         </DropdownMenuItem>

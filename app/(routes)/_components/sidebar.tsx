@@ -6,6 +6,7 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { SidebarRoutes } from "./sidebar-routes";
 import { UserDropdown } from "./user-dropdown";
+import { SignInButton } from "@/components/auth/sign-in-button";
 
 export const Sidebar = async () => {
   const session = await auth();
@@ -37,12 +38,11 @@ export const Sidebar = async () => {
             </button>
           </UserDropdown>
         ) : (
-          <Button
+          <SignInButton
             className={cn(buttonVariants({ className: "w-full", size: "lg" }))}
-            onClick={signInAction}
           >
             Login
-          </Button>
+          </SignInButton>
         )}
       </div>
     </aside>

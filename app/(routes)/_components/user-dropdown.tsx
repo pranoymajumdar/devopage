@@ -1,5 +1,5 @@
 "use client";
-import { signOutAction } from "@/app/_actions/sign-out";
+import { signOutAction } from "@/app/_actions/auth/sign-out";
 import {
   DropdownMenu,
   DropdownMenuTrigger,

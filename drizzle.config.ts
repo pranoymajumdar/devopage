@@ -6,8 +6,8 @@ dotenv.config()
 
 console.log(process.env.DATABASE_URL)
 export default defineConfig({
-  out: "./drizzle",
-  schema: "./db/schemas/index.ts",
+  out: "./server/db/migrations",
+  schema: "./server/db/schemas/index.ts",
   dialect: "postgresql",
   dbCredentials: {
     url: process.env.DATABASE_URL!,

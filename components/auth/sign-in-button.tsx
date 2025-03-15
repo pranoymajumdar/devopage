@@ -1,7 +1,6 @@
 "use client";
 
-
-import { signInAction } from "@/app/_actions/sign-in";
+import { signInAction } from "@/app/_actions/auth/sign-in";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 import { forwardRef, type ReactNode, type ButtonHTMLAttributes } from "react";

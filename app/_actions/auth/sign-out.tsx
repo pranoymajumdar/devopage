@@ -1,6 +1,6 @@
 "use server";
 
-import { signOut } from "@/auth";
+import { signOut } from "@/server/auth";
 
 export const signOutAction = async (callbackPath: string) => {
   await signOut({ redirect: true, redirectTo: callbackPath });

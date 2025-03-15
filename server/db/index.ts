@@ -18,4 +18,6 @@ const conn =
         connectionString: process.env.DATABASE_URL,
       });
 
-export const db = drizzle(conn);
+export const db = drizzle(conn, {
+  logger: true,
+});

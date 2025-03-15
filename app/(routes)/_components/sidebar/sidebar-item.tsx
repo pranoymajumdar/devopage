@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { usePathname, useRouter } from "next/navigation";
-import type { TSidebarItem } from "./types";
+import type { TSidebarItem } from "../types";
 
 export const SidebarItem = ({ icon: Icon, label, href }: TSidebarItem) => {
   const pathname = usePathname();

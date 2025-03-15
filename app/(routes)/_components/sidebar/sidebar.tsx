@@ -1,14 +1,13 @@
-import { signInAction } from "@/app/_actions/sign-in";
 import { auth } from "@/auth";
 import Logo from "@/components/logo";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { SidebarRoutes } from "./sidebar-routes";
-import { UserDropdown } from "./user-dropdown";
+import { UserDropdown } from "../user-dropdown";
 import { SignInButton } from "@/components/auth/sign-in-button";
 
-export const Sidebar = async () => {
+const Sidebar = async () => {
   const session = await auth();
   return (
     <aside className="h-full border-r flex flex-col overflow-y-auto shadow-sm bg-background">
@@ -48,3 +47,4 @@ export const Sidebar = async () => {
     </aside>
   );
 };
+export default Sidebar;

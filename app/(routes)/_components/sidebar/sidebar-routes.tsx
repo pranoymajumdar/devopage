@@ -7,7 +7,7 @@ import {
   LucideSearch,
 } from "lucide-react";
 import { SidebarItem } from "./sidebar-item";
-import { TSidebarItem } from "./types";
+import { TSidebarItem } from "../types";
 
 const routes: TSidebarItem[] = [
   {

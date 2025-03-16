@@ -1,13 +1,9 @@
 "use client";
-import {
-  LucideActivity,
-  LucideBell,
-  LucideBookmark,
-  LucideHome,
-  LucideSearch,
-} from "lucide-react";
-import { SidebarItem } from "./sidebar-item";
+
+import { LucideActivity, LucideBell, LucideBookmark, LucideHome, LucideSearch } from "lucide-react";
+
 import { TSidebarItem } from "../types";
+import { SidebarItem } from "./sidebar-item";
 
 const routes: TSidebarItem[] = [
   {
@@ -39,7 +35,7 @@ const routes: TSidebarItem[] = [
 
 export const SidebarRoutes = () => {
   return (
-    <div className="flex flex-col w-fulls">
+    <div className="w-fulls flex flex-col">
       {routes.map(({ label, href, icon }) => (
         <SidebarItem key={href} label={label} href={href} icon={icon} />
       ))}

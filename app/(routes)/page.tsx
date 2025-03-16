@@ -7,6 +7,7 @@ export default function HomePage() {
           Number: {index}
         </div>
       ))}
+      <div className="flex justify-between bg-blue-500 p-4 text-white">Hello, Devopage!</div>
     </div>
   );
 }

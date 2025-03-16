@@ -1,7 +1,10 @@
 import { Provider } from "@/components/providers";
+
 import "@/styles/globals.css";
+
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+
 import { BottomNav } from "./_components/bottom-nav";
 import { Sidebar } from "./_components/sidebar";
 import { TopNav } from "./_components/top-nav";
@@ -27,13 +30,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Provider>
           <TopNav />
           <div className="h-full">
-            <div className="hidden md:flex h-full w-60 flex-col fixed inset-y-0 z-50">
+            <div className="fixed inset-y-0 z-50 hidden h-full w-60 flex-col md:flex">
               <Sidebar />
             </div>
             <div className="md:ml-64">{children}</div>

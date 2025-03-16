@@ -1,32 +1,19 @@
-import NextAuth from "next-auth";
-import authConfig from "@/auth.config";
-import { db } from "./db";
-import { usersTable } from "./db/schemas";
-import { eq, or } from "drizzle-orm";
+import { betterAuth } from "better-auth";
+import { prismaAdapter } from "better-auth/adapters/prisma";
 
-export const { auth, handlers, signIn, signOut } = NextAuth({
-  session: { strategy: "jwt" },
-  callbacks: {
-    async signIn({ user, account }) {
-      if (account?.provider === "github" && user.id) {
-        const conditions = [eq(usersTable.githubId, user.id)];
-        if (user.email) conditions.push(eq(usersTable.email, user.email));
-        const existingUser = await db
-          .select()
-          .from(usersTable)
-          .where(or(...conditions));
-        if (existingUser.length === 0) {
-          await db.insert(usersTable).values({
-            avatar: user.image,
-            githubId: user.id,
-            email: user.email,
-            username: user.id,
-          });
-        }
-        return true;
-      }
-      return false;
+import { prisma } from "./prisma";
+
+export const auth = betterAuth({
+  database: prismaAdapter(prisma, {
+    provider: "postgresql",
+  }),
+  emailAndPassword: {
+    enabled: true,
+  },
+  socialProviders: {
+    github: {
+      clientId: process.env.GITHUB_CLIENT_ID!,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET!,
     },
   },
-  ...authConfig,
 });

@@ -1,28 +1,25 @@
 "use client";
-import { signOutAction } from "@/app/_actions/auth/sign-out";
+
+import type { ReactNode } from "react";
+import { useRouter } from "next/navigation";
+import { LucideHelpCircle, LucideLogOut, LucideSettings, LucideUser } from "lucide-react";
+
 import {
   DropdownMenu,
-  DropdownMenuTrigger,
   DropdownMenuContent,
+  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuItem,
+  DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import {
-  LucideUser,
-  LucideSettings,
-  LucideHelpCircle,
-  LucideLogOut,
-} from "lucide-react";
-import { usePathname } from "next/navigation";
-import type { ReactNode } from "react";
+import { signOut } from "@/lib/auth-client";
 
 type Props = {
   children: ReactNode;
 };
 
 export const UserDropdown = ({ children }: Props) => {
-  const pathName = usePathname();
+  const router = useRouter();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>{children}</DropdownMenuTrigger>
@@ -44,7 +41,10 @@ export const UserDropdown = ({ children }: Props) => {
         <DropdownMenuSeparator />
         <DropdownMenuItem
           className="text-red-600"
-          onSelect={() => signOutAction(pathName)}
+          onSelect={async () => {
+            await signOut();
+            router.refresh();
+          }}
         >
           <LucideLogOut className="mr-2 h-4 w-4" />
           Log out

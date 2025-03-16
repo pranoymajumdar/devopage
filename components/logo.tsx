@@ -1,8 +1,10 @@
 "use client";
+
 import React, { useState } from "react";
-import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
 import { Montserrat } from "next/font/google";
+import { motion } from "framer-motion";
+
+import { cn } from "@/lib/utils";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -65,7 +67,7 @@ export default function Logo({
           viewBox="0 0 40 40"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="w-full h-full"
+          className="h-full w-full"
         >
           {/* Modern square with rounded corners */}
           <rect
@@ -74,7 +76,7 @@ export default function Logo({
             width="32"
             height="32"
             rx="8"
-            className="fill-muted stroke-muted-foreground/10 "
+            className="fill-muted stroke-muted-foreground/10"
           />
 
           {/* Main logo shape - stylized "D" */}
@@ -137,7 +139,7 @@ export default function Logo({
               textSizeClasses[textSize],
               "text-foreground",
               montserrat.className,
-              "font-semibold tracking-tight leading-none"
+              "leading-none font-semibold tracking-tight",
             )}
           >
             DevoPage
@@ -146,11 +148,7 @@ export default function Logo({
             initial={withAnimation ? { opacity: 0 } : false}
             animate={withAnimation ? { opacity: 1 } : false}
             transition={{ duration: 0.3, delay: 0.1 }}
-            className={cn(
-              "text-xs text-muted-foreground",
-              montserrat.className,
-              "font-medium"
-            )}
+            className={cn("text-muted-foreground text-xs", montserrat.className, "font-medium")}
           >
             Developers Platform
           </motion.div>

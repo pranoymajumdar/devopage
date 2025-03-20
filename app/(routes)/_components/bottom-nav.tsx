@@ -1,6 +1,5 @@
 "use client";
 
-import type { ComponentType, ReactNode } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
@@ -13,36 +12,24 @@ import {
   LucideUser,
 } from "lucide-react";
 
+import { useSession } from "@/lib/auth-client";
 import { cn } from "@/lib/utils";
 
-import { UserDropdown } from "./user-dropdown";
-
-type NavItemBase = {
+type NavItemProps = {
   label: string;
   icon: LucideIcon;
-};
-
-type NavItemWithHref = NavItemBase & {
   href: string;
-  wrapperComponent?: never; // Prevents wrapperComponent when href is present
 };
-
-type NavItemWithWrapper = NavItemBase & {
-  href?: never; // Prevents href when wrapperComponent is present
-  wrapperComponent: ComponentType<{ children: ReactNode }>;
-};
-
-type NavItemProps = NavItemWithHref | NavItemWithWrapper;
-
-const NavItem = ({ label, icon: Icon, href, wrapperComponent: WrapperComponent }: NavItemProps) => {
+const NavItem = ({ label, icon: Icon, href }: NavItemProps) => {
   const pathname = usePathname();
+
   const isActive = pathname === href;
-  const baseClasses = cn(
-    "relative flex flex-col items-center justify-center w-full",
-    "transition-colors duration-200",
-  );
-  const content = (
-    <>
+
+  return (
+    <Link
+      href={href}
+      className="relative flex w-full flex-col items-center justify-center transition-colors duration-200"
+    >
       <div className="relative">
         {isActive && (
           <motion.div
@@ -77,29 +64,19 @@ const NavItem = ({ label, icon: Icon, href, wrapperComponent: WrapperComponent }
           transition={{ type: "spring", duration: 0.5 }}
         />
       )}
-    </>
-  );
-
-  return WrapperComponent ? (
-    <WrapperComponent>
-      <span className={baseClasses}>{content}</span>
-    </WrapperComponent>
-  ) : (
-    <Link className={baseClasses} href={href}>
-      {content}
     </Link>
   );
 };
-
 export const BottomNav = () => {
+  const { data: session } = useSession();
   return (
-    <div className="bg-background/80 fixed right-0 bottom-0 left-0 z-50 block border-t backdrop-blur-md md:hidden">
+    <div className="bg-background/80 sticky right-0 bottom-0 left-0 z-50 block border-t backdrop-blur-md md:hidden">
       <nav className="mx-auto flex h-20 max-w-md items-center justify-between px-2">
         <NavItem label="Home" icon={LucideHome} href="/" />
         <NavItem label="Search" icon={LucideSearch} href="/search" />
         <NavItem label="Explore" icon={LucideSparkles} href="/explore" />
         <NavItem label="Notifications" icon={LucideBell} href="/notifications" />
-        <NavItem label="Profile" icon={LucideUser} wrapperComponent={UserDropdown} />
+        {session?.user && <NavItem label="Profile" icon={LucideUser} href="/profile" />}
       </nav>
     </div>
   );

@@ -1,0 +1,10 @@
+model Profile {
+    userId   String   @id @unique
+    user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    username String?  @unique
+    bio      String?
+    location String?
+    website  String?
+    joinedAt DateTime @default(now())
+    avatar   String?
+}

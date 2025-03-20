@@ -12,7 +12,7 @@ const Sidebar = async () => {
     headers: await headers(),
   });
   return (
-    <aside className="bg-background flex h-full flex-col overflow-y-auto border-r shadow-sm">
+    <aside className="bg-card/40 flex h-full flex-col overflow-y-auto border-r shadow-sm">
       <div className="p-6">
         <Logo size="sm" />
       </div>

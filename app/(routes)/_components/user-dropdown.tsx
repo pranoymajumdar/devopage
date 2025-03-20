@@ -12,6 +12,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useIsMounted } from "@/hooks/useIsMounted";
 import { signOut } from "@/lib/auth-client";
 
 type Props = {
@@ -20,13 +21,15 @@ type Props = {
 
 export const UserDropdown = ({ children }: Props) => {
   const router = useRouter();
+  const isMounted = useIsMounted();
+  if (!isMounted) return null;
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>{children}</DropdownMenuTrigger>
       <DropdownMenuContent className="w-[220px] max-md:m-2" align="start">
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
+        <DropdownMenuItem onSelect={() => router.push("/profile")}>
           <LucideUser className="mr-2 h-4 w-4" />
           Profile
         </DropdownMenuItem>

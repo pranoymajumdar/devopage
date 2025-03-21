@@ -1,5 +1,6 @@
 import { type ReactNode } from "react";
 
+import { TanstackProvider } from "./tanstack";
 import { ThemeProvider } from "./theme";
 
 type Props = {
@@ -7,5 +8,9 @@ type Props = {
 };
 
 export const Provider = ({ children }: Props) => {
-  return <ThemeProvider>{children}</ThemeProvider>;
+  return (
+    <TanstackProvider>
+      <ThemeProvider>{children}</ThemeProvider>
+    </TanstackProvider>
+  );
 };

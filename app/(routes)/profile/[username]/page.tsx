@@ -1,20 +1,23 @@
 import { headers } from "next/headers";
 import Link from "next/link";
 import { auth } from "@/server/auth";
+import { prisma } from "@/server/prisma";
 import {
   LucideCalendarDays,
+  LucideEdit,
+  LucideLayoutDashboard,
   LucideLink as LucideLinkIcon,
   LucideMapPin,
   LucideMessageSquare,
   LucideUser,
 } from "lucide-react";
 
-import { NotLoggedInEmptyState } from "@/components/auth/not-signed-in";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 
+import UserNotFoundPage from "../_components/not-found";
 import { NavigationTabs } from "../_components/tabs";
 
 const user = {
@@ -265,20 +268,30 @@ const ProfilePage = async ({ params }: { params: { username: string } }) => {
     headers: await headers(),
   });
 
-  if (!session?.user) return <NotLoggedInEmptyState />;
+  const profile = await prisma.profile.findFirst({
+    where: {
+      username: username,
+    },
+    include: { user: true },
+  });
+  if (!profile) return <UserNotFoundPage />;
+
   return (
     <div className="min-h-screen">
       <div className="space-y-8">
         <div className="relative container mx-auto mt-6 px-4">
           <div className="flex flex-col lg:flex-row lg:gap-6">
             <Avatar className="bg-background h-32 w-32 border-4 shadow-md lg:h-28 lg:w-28">
-              <AvatarImage src={session.user.image || ""} alt={user.name} />
+              <AvatarImage
+                src={profile.avatar || profile.user.image || ""}
+                alt={profile.user.name}
+              />
               <AvatarFallback className="text-4xl">{user.name[0]}</AvatarFallback>
             </Avatar>
 
             <div className="mt-4 flex w-full max-w-full flex-col flex-wrap lg:mt-0 lg:text-left">
-              <h1 className="text-2xl font-bold lg:text-3xl">{session.user.name}</h1>
-              <p className="text-muted-foreground">{session.user.email}</p>
+              <h1 className="text-2xl font-bold lg:text-3xl">{profile.user.name}</h1>
+              <p className="text-muted-foreground">{profile.username}</p>
 
               <div className="mt-2 flex items-center gap-4 text-sm">
                 <div className="flex items-center gap-1">
@@ -324,14 +337,29 @@ const ProfilePage = async ({ params }: { params: { username: string } }) => {
             </div>
 
             <div className="mt-6 flex w-full max-w-full flex-wrap gap-3 lg:mt-0 lg:w-fit lg:max-w-fit lg:self-start">
-              <Button className="flex-1">
-                <LucideUser className="mr-2 h-4 w-4" />
-                Follow
-              </Button>
-              <Button variant="outline" className="flex-1">
-                <LucideMessageSquare className="mr-2 h-4 w-4" />
-                Message
-              </Button>
+              {session?.user.id === profile.userId ? (
+                <>
+                  <Button className="flex-1">
+                    <LucideEdit className="mr-2 h-4 w-4" />
+                    Edit Profile
+                  </Button>
+                  <Button variant="outline" className="flex-1">
+                    <LucideLayoutDashboard className="mr-2 h-4 w-4" />
+                    Dashboard
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Button className="flex-1">
+                    <LucideUser className="mr-2 h-4 w-4" />
+                    Follow
+                  </Button>
+                  <Button variant="outline" className="flex-1">
+                    <LucideMessageSquare className="mr-2 h-4 w-4" />
+                    Message
+                  </Button>
+                </>
+              )}
             </div>
           </div>
         </div>

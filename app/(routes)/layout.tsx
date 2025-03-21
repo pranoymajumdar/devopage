@@ -5,6 +5,8 @@ import "@/styles/globals.css";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
+import { Toaster } from "@/components/ui/sonner";
+
 import { BottomNav } from "./_components/bottom-nav";
 import { Sidebar } from "./_components/sidebar";
 
@@ -39,6 +41,7 @@ export default function RootLayout({
           </div>
           <BottomNav />
         </Provider>
+        <Toaster />
       </body>
     </html>
   );

@@ -4,6 +4,9 @@ import "@/styles/globals.css";
 
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { headers } from "next/headers";
+import { auth } from "@/server/auth";
+import { prisma } from "@/server/prisma";
 
 import { Toaster } from "@/components/ui/sonner";
 
@@ -24,11 +27,18 @@ export const metadata: Metadata = {
   title: "Devopage",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await auth.api.getSession({ headers: await headers() });
+  const user = session?.user || null;
+  const profile = await prisma.profile.findFirst({
+    where: {
+      userId: user?.id,
+    },
+  });
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
@@ -39,7 +49,7 @@ export default function RootLayout({
             </div>
             <div className="min-h-screen md:ml-60">{children}</div>
           </div>
-          <BottomNav />
+          <BottomNav profile={profile} />
         </Provider>
         <Toaster />
       </body>

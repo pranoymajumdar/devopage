@@ -20,13 +20,13 @@ type LogoProps = {
   withAnimation?: boolean;
 };
 
-export default function Logo({
+export const Logo = ({
   className,
   size = "lg",
   withText = true,
   textSize = "md",
   withAnimation = false,
-}: LogoProps) {
+}: LogoProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const sizeClasses = {
@@ -156,4 +156,4 @@ export default function Logo({
       )}
     </div>
   );
-}
+};

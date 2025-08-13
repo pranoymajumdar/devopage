@@ -10,9 +10,13 @@
     "fmt": "pnpm exec prettier . --write"
   },
   "dependencies": {
+    "@prisma/client": "6.14.0",
+    "@t3-oss/env-nextjs": "^0.13.8",
+    "better-auth": "^1.3.6",
     "next": "15.4.6",
     "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "react-dom": "19.1.0",
+    "zod": "^4.0.17"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -23,6 +27,7 @@
     "eslint": "^9",
     "eslint-config-next": "15.4.6",
     "prettier": "3.6.2",
+    "prisma": "^6.14.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

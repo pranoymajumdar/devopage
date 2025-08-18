@@ -1,3 +1,4 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
 	createRootRouteWithContext,
 	HeadContent,
@@ -8,10 +9,12 @@ import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import Loader from "@/components/loader";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
+
 import "../index.css";
 
-// biome-ignore lint/complexity/noBannedTypes: <todo: add tanstack query>
-export type RouterAppContext = {};
+const queryClient = new QueryClient();
+
+export type RouterAppContext = { queryClient: QueryClient };
 
 export const Route = createRootRouteWithContext<RouterAppContext>()({
 	component: RootComponent,
@@ -42,16 +45,18 @@ function RootComponent() {
 	return (
 		<>
 			<HeadContent />
-			<ThemeProvider
-				attribute="class"
-				defaultTheme="dark"
-				disableTransitionOnChange
-				storageKey="vite-ui-theme"
-			>
-				{isFetching ? <Loader /> : <Outlet />}
-				<Toaster richColors />
-			</ThemeProvider>
-			<TanStackRouterDevtools position="bottom-left" />
+			<QueryClientProvider client={queryClient}>
+				<ThemeProvider
+					attribute="class"
+					defaultTheme="dark"
+					disableTransitionOnChange
+					storageKey="vite-ui-theme"
+				>
+					{isFetching ? <Loader /> : <Outlet />}
+					<Toaster richColors />
+				</ThemeProvider>
+			</QueryClientProvider>
+			<TanStackRouterDevtools position="bottom-right" />
 		</>
 	);
 }

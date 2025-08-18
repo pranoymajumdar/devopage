@@ -9,68 +9,227 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as LoginRouteImport } from './routes/login'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as MainLayoutRouteImport } from './routes/_mainLayout'
+import { Route as MainLayoutIndexRouteImport } from './routes/_mainLayout/index'
+import { Route as MainLayoutTrendingRouteImport } from './routes/_mainLayout/trending'
+import { Route as MainLayoutNotificationsRouteImport } from './routes/_mainLayout/notifications'
+import { Route as MainLayoutMessagesRouteImport } from './routes/_mainLayout/messages'
+import { Route as MainLayoutExploreRouteImport } from './routes/_mainLayout/explore'
+import { Route as MainLayoutChallengesRouteImport } from './routes/_mainLayout/challenges'
+import { Route as MainLayoutBookmarksRouteImport } from './routes/_mainLayout/bookmarks'
 
-const LoginRoute = LoginRouteImport.update({
-  id: '/login',
-  path: '/login',
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
+const MainLayoutRoute = MainLayoutRouteImport.update({
+  id: '/_mainLayout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MainLayoutIndexRoute = MainLayoutIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => MainLayoutRoute,
+} as any)
+const MainLayoutTrendingRoute = MainLayoutTrendingRouteImport.update({
+  id: '/trending',
+  path: '/trending',
+  getParentRoute: () => MainLayoutRoute,
+} as any)
+const MainLayoutNotificationsRoute = MainLayoutNotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => MainLayoutRoute,
+} as any)
+const MainLayoutMessagesRoute = MainLayoutMessagesRouteImport.update({
+  id: '/messages',
+  path: '/messages',
+  getParentRoute: () => MainLayoutRoute,
+} as any)
+const MainLayoutExploreRoute = MainLayoutExploreRouteImport.update({
+  id: '/explore',
+  path: '/explore',
+  getParentRoute: () => MainLayoutRoute,
+} as any)
+const MainLayoutChallengesRoute = MainLayoutChallengesRouteImport.update({
+  id: '/challenges',
+  path: '/challenges',
+  getParentRoute: () => MainLayoutRoute,
+} as any)
+const MainLayoutBookmarksRoute = MainLayoutBookmarksRouteImport.update({
+  id: '/bookmarks',
+  path: '/bookmarks',
+  getParentRoute: () => MainLayoutRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/login': typeof LoginRoute
+  '/auth': typeof AuthRoute
+  '/bookmarks': typeof MainLayoutBookmarksRoute
+  '/challenges': typeof MainLayoutChallengesRoute
+  '/explore': typeof MainLayoutExploreRoute
+  '/messages': typeof MainLayoutMessagesRoute
+  '/notifications': typeof MainLayoutNotificationsRoute
+  '/trending': typeof MainLayoutTrendingRoute
+  '/': typeof MainLayoutIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/login': typeof LoginRoute
+  '/auth': typeof AuthRoute
+  '/bookmarks': typeof MainLayoutBookmarksRoute
+  '/challenges': typeof MainLayoutChallengesRoute
+  '/explore': typeof MainLayoutExploreRoute
+  '/messages': typeof MainLayoutMessagesRoute
+  '/notifications': typeof MainLayoutNotificationsRoute
+  '/trending': typeof MainLayoutTrendingRoute
+  '/': typeof MainLayoutIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/login': typeof LoginRoute
+  '/_mainLayout': typeof MainLayoutRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/_mainLayout/bookmarks': typeof MainLayoutBookmarksRoute
+  '/_mainLayout/challenges': typeof MainLayoutChallengesRoute
+  '/_mainLayout/explore': typeof MainLayoutExploreRoute
+  '/_mainLayout/messages': typeof MainLayoutMessagesRoute
+  '/_mainLayout/notifications': typeof MainLayoutNotificationsRoute
+  '/_mainLayout/trending': typeof MainLayoutTrendingRoute
+  '/_mainLayout/': typeof MainLayoutIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login'
+  fullPaths:
+    | '/auth'
+    | '/bookmarks'
+    | '/challenges'
+    | '/explore'
+    | '/messages'
+    | '/notifications'
+    | '/trending'
+    | '/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login'
-  id: '__root__' | '/' | '/login'
+  to:
+    | '/auth'
+    | '/bookmarks'
+    | '/challenges'
+    | '/explore'
+    | '/messages'
+    | '/notifications'
+    | '/trending'
+    | '/'
+  id:
+    | '__root__'
+    | '/_mainLayout'
+    | '/auth'
+    | '/_mainLayout/bookmarks'
+    | '/_mainLayout/challenges'
+    | '/_mainLayout/explore'
+    | '/_mainLayout/messages'
+    | '/_mainLayout/notifications'
+    | '/_mainLayout/trending'
+    | '/_mainLayout/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  LoginRoute: typeof LoginRoute
+  MainLayoutRoute: typeof MainLayoutRouteWithChildren
+  AuthRoute: typeof AuthRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/login': {
-      id: '/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginRouteImport
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
+    '/_mainLayout': {
+      id: '/_mainLayout'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof MainLayoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_mainLayout/': {
+      id: '/_mainLayout/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof MainLayoutIndexRouteImport
+      parentRoute: typeof MainLayoutRoute
+    }
+    '/_mainLayout/trending': {
+      id: '/_mainLayout/trending'
+      path: '/trending'
+      fullPath: '/trending'
+      preLoaderRoute: typeof MainLayoutTrendingRouteImport
+      parentRoute: typeof MainLayoutRoute
+    }
+    '/_mainLayout/notifications': {
+      id: '/_mainLayout/notifications'
+      path: '/notifications'
+      fullPath: '/notifications'
+      preLoaderRoute: typeof MainLayoutNotificationsRouteImport
+      parentRoute: typeof MainLayoutRoute
+    }
+    '/_mainLayout/messages': {
+      id: '/_mainLayout/messages'
+      path: '/messages'
+      fullPath: '/messages'
+      preLoaderRoute: typeof MainLayoutMessagesRouteImport
+      parentRoute: typeof MainLayoutRoute
+    }
+    '/_mainLayout/explore': {
+      id: '/_mainLayout/explore'
+      path: '/explore'
+      fullPath: '/explore'
+      preLoaderRoute: typeof MainLayoutExploreRouteImport
+      parentRoute: typeof MainLayoutRoute
+    }
+    '/_mainLayout/challenges': {
+      id: '/_mainLayout/challenges'
+      path: '/challenges'
+      fullPath: '/challenges'
+      preLoaderRoute: typeof MainLayoutChallengesRouteImport
+      parentRoute: typeof MainLayoutRoute
+    }
+    '/_mainLayout/bookmarks': {
+      id: '/_mainLayout/bookmarks'
+      path: '/bookmarks'
+      fullPath: '/bookmarks'
+      preLoaderRoute: typeof MainLayoutBookmarksRouteImport
+      parentRoute: typeof MainLayoutRoute
     }
   }
 }
 
+interface MainLayoutRouteChildren {
+  MainLayoutBookmarksRoute: typeof MainLayoutBookmarksRoute
+  MainLayoutChallengesRoute: typeof MainLayoutChallengesRoute
+  MainLayoutExploreRoute: typeof MainLayoutExploreRoute
+  MainLayoutMessagesRoute: typeof MainLayoutMessagesRoute
+  MainLayoutNotificationsRoute: typeof MainLayoutNotificationsRoute
+  MainLayoutTrendingRoute: typeof MainLayoutTrendingRoute
+  MainLayoutIndexRoute: typeof MainLayoutIndexRoute
+}
+
+const MainLayoutRouteChildren: MainLayoutRouteChildren = {
+  MainLayoutBookmarksRoute: MainLayoutBookmarksRoute,
+  MainLayoutChallengesRoute: MainLayoutChallengesRoute,
+  MainLayoutExploreRoute: MainLayoutExploreRoute,
+  MainLayoutMessagesRoute: MainLayoutMessagesRoute,
+  MainLayoutNotificationsRoute: MainLayoutNotificationsRoute,
+  MainLayoutTrendingRoute: MainLayoutTrendingRoute,
+  MainLayoutIndexRoute: MainLayoutIndexRoute,
+}
+
+const MainLayoutRouteWithChildren = MainLayoutRoute._addFileChildren(
+  MainLayoutRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  LoginRoute: LoginRoute,
+  MainLayoutRoute: MainLayoutRouteWithChildren,
+  AuthRoute: AuthRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

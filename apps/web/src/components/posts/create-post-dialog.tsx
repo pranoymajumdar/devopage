@@ -30,10 +30,10 @@ export function CreatePostDialog({ children }: { children: ReactNode }) {
 			onSubmit: createPostSchema,
 		},
 		onSubmit: async ({ value }) => {
-			const response = await createPost.mutateAsync({ json: value });
-			const createdPost = await response.json();
-			if (!createdPost.success) {
-				return setError(createdPost.error);
+			const res = await createPost.mutateAsync({ values: value });
+
+			if (!res.success) {
+				return setError(res.error);
 			}
 
 			form.reset();

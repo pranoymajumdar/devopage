@@ -8,7 +8,7 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import type { TAuthUser } from "@/lib/auth-client";
+import { authClient, type TAuthUser } from "@/lib/auth-client";
 
 export function UserMenu({
 	children,
@@ -29,7 +29,12 @@ export function UserMenu({
 					<span>Settings</span>
 				</DropdownMenuItem>
 				<DropdownMenuSeparator />
-				<DropdownMenuItem className="gap-2 text-destructive focus:text-destructive">
+				<DropdownMenuItem
+					onSelect={async () => {
+						await authClient.signOut();
+					}}
+					className="gap-2 text-destructive focus:text-destructive"
+				>
 					<LucideLogOut className="h-4 w-4" />
 					<span>Log out</span>
 				</DropdownMenuItem>

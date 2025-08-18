@@ -13,7 +13,7 @@ export const postsTable = pgTable("posts", {
 
 export const postsRelations = relations(postsTable, ({ one }) => ({
 	author: one(user, {
-		fields: [postsTable.id],
+		fields: [postsTable.authorId],
 		references: [user.id],
 	}),
 }));

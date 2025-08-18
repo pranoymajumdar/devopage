@@ -1,9 +1,11 @@
+import type { TPost } from "@server/db/schema";
 import { queryOptions } from "@tanstack/react-query";
-import { hc } from "@/lib/hc";
+import { api } from "@/lib/api";
 
-export function postsQueryOptions() {
+export function fetchPostsOptions() {
 	return queryOptions({
 		queryKey: ["posts"],
-		queryFn: hc.posts.all.$get,
+		queryFn: async () => await api.get<TPost[]>("/posts/all"),
+		staleTime: 0,
 	});
 }

@@ -15,8 +15,8 @@ export function SidebarFooter() {
 			<div className="flex h-auto w-full items-center justify-start gap-3 px-3 py-2">
 				<Skeleton className="h-8 w-8 rounded-full" />
 				<div className="flex flex-1 flex-col items-start space-y-2 text-left">
-					<Skeleton className="h-1.5 w-[150px]" />
-					<Skeleton className="h-1.5 w-[100px]" />
+					<Skeleton className="h-2.5 w-[150px]" />
+					<Skeleton className="h-2 w-[100px]" />
 				</div>
 				<LucideMoreHorizontal className="h-4 w-4 text-muted-foreground" />
 			</div>

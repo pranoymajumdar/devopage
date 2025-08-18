@@ -22,7 +22,8 @@
 			"!**/.expo",
 			"!**/.wrangler",
 			"!**/wrangler.jsonc",
-			"!**/.source"
+			"!**/.source",
+			"!**/*.css"
 		]
 	},
 	"formatter": {

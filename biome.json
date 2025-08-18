@@ -23,7 +23,8 @@
 			"!**/.wrangler",
 			"!**/wrangler.jsonc",
 			"!**/.source",
-			"!**/*.css"
+			"!**/*.css",
+			"!apps/web/src/components/ui/*"
 		]
 	},
 	"formatter": {

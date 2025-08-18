@@ -1,4 +1,5 @@
 import { LucideCode2, LucidePlus } from "lucide-react";
+import { CreatePostDialog } from "@/components/posts/create-post-dialog";
 import { Button } from "@/components/ui/button";
 import { authClient } from "@/lib/auth-client";
 
@@ -15,10 +16,16 @@ export function SidebarHeader() {
 				<span className="font-semibold text-lg">Devopage</span>
 			</div>
 
-			<Button size="lg" disabled={isAuthenticated === false} className="w-full">
-				<LucidePlus className="mr-2 h-4 w-4" />
-				Create Post
-			</Button>
+			<CreatePostDialog>
+				<Button
+					size="lg"
+					disabled={isAuthenticated === false}
+					className="w-full"
+				>
+					<LucidePlus className="mr-2 h-4 w-4" />
+					Create Post
+				</Button>
+			</CreatePostDialog>
 		</div>
 	);
 }

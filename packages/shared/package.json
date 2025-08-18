@@ -1,0 +1,17 @@
+{
+	"name": "@devopage/shared",
+	"version": "1.0.0",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"type": "module",
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"build": "tsc -b",
+		"dev": "tsc --watch"
+	},
+	"dependencies": {
+		"zod": "^4.0.17"
+	}
+}

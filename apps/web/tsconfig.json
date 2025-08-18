@@ -1,6 +1,7 @@
 {
 	"compilerOptions": {
 		"strict": true,
+		"composite": true,
 		"esModuleInterop": true,
 		"jsx": "react-jsx",
 		"target": "ESNext",
@@ -12,7 +13,8 @@
 		"rootDirs": ["."],
 		"baseUrl": ".",
 		"paths": {
-			"@/*": ["./src/*"]
+			"@/*": ["./src/*"],
+			"@server/*": ["../server/src/*"]
 		}
 	},
 	"references": [

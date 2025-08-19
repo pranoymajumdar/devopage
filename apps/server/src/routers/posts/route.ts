@@ -1,7 +1,7 @@
 import { createPostSchema } from "@devopage/shared";
 import { zValidator } from "@hono/zod-validator";
 import { Hono } from "hono";
-import { HTTPException } from "hono/http-exception";
+import { StatusCodes } from "http-status-codes";
 import { db } from "@/db";
 import { postsTable } from "@/db/schema";
 
@@ -15,7 +15,13 @@ postsRoutes.post("/", zValidator("json", createPostSchema), async (c) => {
 	const { content } = c.req.valid("json");
 	const user = c.get("user");
 	if (!user) {
-		throw new HTTPException(401, { message: "UNAUTHORIZED" });
+		return c.json(
+			{
+				success: false,
+				error: "You need to sign in.",
+			},
+			StatusCodes.UNAUTHORIZED,
+		);
 	}
 	const [newPost] = await db
 		.insert(postsTable)

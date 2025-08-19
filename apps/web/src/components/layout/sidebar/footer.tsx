@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 
 import { LucideAlertCircle, LucideMoreHorizontal } from "lucide-react";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Alert, AlertTitle } from "@/components/ui/alert";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -25,16 +25,8 @@ export function SidebarFooter() {
 	if (error) {
 		return (
 			<Alert variant="destructive">
-				<LucideAlertCircle />
-				<AlertTitle>Unable to fetch your details.</AlertTitle>
-				<AlertDescription>
-					<p>Try these troubleshooting steps.</p>
-					<ul className="list-inside list-disc text-sm">
-						<li>Refresh this page.</li>
-						<li>Check your internet connection.</li>
-						<li>Contact support.</li>
-					</ul>
-				</AlertDescription>
+				<LucideAlertCircle className="h-4 w-4" />
+				<AlertTitle className="text-sm">Unable to load data</AlertTitle>
 			</Alert>
 		);
 	}

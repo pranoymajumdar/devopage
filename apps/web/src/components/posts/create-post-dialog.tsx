@@ -3,6 +3,7 @@ import { useForm } from "@tanstack/react-form";
 import { LucideLoader2, LucidePlusCircle, LucideXCircle } from "lucide-react";
 import { type ReactNode, useState } from "react";
 import { useCreatePost } from "@/hooks/useCreatePost";
+import { ApiError } from "@/lib/api";
 import { Alert, AlertDescription } from "../ui/alert";
 import { Button } from "../ui/button";
 import {
@@ -30,14 +31,15 @@ export function CreatePostDialog({ children }: { children: ReactNode }) {
 			onSubmit: createPostSchema,
 		},
 		onSubmit: async ({ value }) => {
-			const res = await createPost.mutateAsync({ values: value });
-
-			if (!res.success) {
-				return setError(res.error);
+			try {
+				await createPost.mutateAsync({ values: value });
+				form.reset();
+				setDialogOpen(false);
+			} catch (err) {
+				if (err instanceof ApiError) {
+					return setError(err.message);
+				}
 			}
-
-			form.reset();
-			setDialogOpen(false);
 		},
 	});
 	return (
@@ -74,7 +76,10 @@ export function CreatePostDialog({ children }: { children: ReactNode }) {
 										name={field.name}
 										value={field.state.value}
 										onBlur={field.handleBlur}
-										onChange={(e) => field.handleChange(e.target.value)}
+										onChange={(e) => {
+											field.handleChange(e.target.value);
+											setError(undefined);
+										}}
 									/>
 									{field.state.meta.errors.map((error) => (
 										<p key={error?.message} className="text-red-500">

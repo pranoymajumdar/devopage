@@ -6,7 +6,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { authClient } from "@/lib/auth-client";
-import { UserMenu } from "../user-menu";
+import { UserMenu } from "../UserMenu";
 
 export function SidebarFooter() {
 	const { data: getSession, isPending, error } = authClient.useSession();

@@ -24,10 +24,12 @@ api.interceptors.response.use(
 	(error: unknown) => {
 		if (axios.isAxiosError<TApiResponse<unknown>>(error)) {
 			const data = error.response?.data;
-			if (data && !data.success) {
+			if (data && data.success === false) {
 				return Promise.reject(new ApiError(data.error));
 			}
+			return Promise.reject(new ApiError("Internal Server Error"));
 		}
+
 		return Promise.reject(new ApiError("Internal Server Error"));
 	},
 );

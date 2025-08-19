@@ -1,5 +1,5 @@
 import { createFileRoute, Outlet } from "@tanstack/react-router";
-import { BottomNavigation } from "@/components/layout/bottom-tab";
+import { BottomNavigation } from "@/components/layout/BottomTab";
 import { Sidebar } from "@/components/layout/sidebar";
 
 export const Route = createFileRoute("/_mainLayout")({

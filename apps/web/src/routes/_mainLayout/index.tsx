@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
-import { PostCard } from "@/components/posts/post-card";
+import { PostCard } from "@/components/posts/PostCard";
 import { fetchPostsOptions } from "@/queries/posts";
 
 export const Route = createFileRoute("/_mainLayout/")({

@@ -2,7 +2,6 @@ import { createPostSchema } from "@devopage/shared";
 import { useForm } from "@tanstack/react-form";
 import { LucideLoader2, LucidePlusCircle, LucideXCircle } from "lucide-react";
 import { type ReactNode, useState } from "react";
-import { useCreatePost } from "@/hooks/useCreatePost";
 import { ApiError } from "@/lib/api";
 import { Alert, AlertDescription } from "../ui/alert";
 import { Button } from "../ui/button";
@@ -18,6 +17,7 @@ import {
 } from "../ui/dialog";
 import { Label } from "../ui/label";
 import { Textarea } from "../ui/textarea";
+import { useCreatePost } from "@/services/posts";
 
 export function CreatePostDialog({ children }: { children: ReactNode }) {
 	const createPost = useCreatePost();

@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { CreatePostDialog } from "../posts/CreatePostDialog";
 
 const navLinks = [
 	{
@@ -50,13 +51,11 @@ export function BottomNavigation() {
 				{navLinks.map((link, index) => {
 					if (link.href === "/create") {
 						return (
-							<Button
-								key={link.href}
-								size="icon"
-								className="m-auto rounded-full"
-							>
-								<LucidePlus />
-							</Button>
+							<CreatePostDialog key={link.href}>
+								<Button size="icon" className="m-auto rounded-full">
+									<LucidePlus />
+								</Button>
+							</CreatePostDialog>
 						);
 					}
 					const isActive = location.pathname === link.href;

@@ -11,6 +11,7 @@ import {
 	LucideMoreHorizontal,
 	LucideShare,
 } from "lucide-react";
+import type { ReactNode } from "react";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -18,10 +19,9 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useDeletePost } from "@/services/posts";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Button } from "../ui/button";
-import type { ReactNode } from "react";
-import { useDeletePost } from "@/services/posts";
 
 function PostActionMenu({
 	children,
@@ -67,7 +67,10 @@ function PostActionMenu({
 
 export function PostCard({ post }: { post: TPost }) {
 	return (
-		<div className="mx-auto w-full rounded-lg p-4 transition-colors hover:bg-card/20">
+		<div
+			id={post.id}
+			className="mx-auto w-full rounded-lg p-4 transition-colors hover:bg-card/20"
+		>
 			<div className="space-y-3">
 				{/* Header */}
 				<div className="flex items-start gap-3">

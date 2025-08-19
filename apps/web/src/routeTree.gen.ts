@@ -18,7 +18,8 @@ import { Route as MainLayoutMessagesRouteImport } from './routes/_mainLayout/mes
 import { Route as MainLayoutExploreRouteImport } from './routes/_mainLayout/explore'
 import { Route as MainLayoutChallengesRouteImport } from './routes/_mainLayout/challenges'
 import { Route as MainLayoutBookmarksRouteImport } from './routes/_mainLayout/bookmarks'
-import { Route as MainLayoutPostIdRouteImport } from './routes/_mainLayout/post/[id]'
+import { Route as MainLayoutProfileUserIdRouteImport } from './routes/_mainLayout/profile/$userId'
+import { Route as MainLayoutPostPostIdRouteImport } from './routes/_mainLayout/post/$postId'
 
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
@@ -64,9 +65,14 @@ const MainLayoutBookmarksRoute = MainLayoutBookmarksRouteImport.update({
   path: '/bookmarks',
   getParentRoute: () => MainLayoutRoute,
 } as any)
-const MainLayoutPostIdRoute = MainLayoutPostIdRouteImport.update({
-  id: '/post/id',
-  path: '/post/id',
+const MainLayoutProfileUserIdRoute = MainLayoutProfileUserIdRouteImport.update({
+  id: '/profile/$userId',
+  path: '/profile/$userId',
+  getParentRoute: () => MainLayoutRoute,
+} as any)
+const MainLayoutPostPostIdRoute = MainLayoutPostPostIdRouteImport.update({
+  id: '/post/$postId',
+  path: '/post/$postId',
   getParentRoute: () => MainLayoutRoute,
 } as any)
 
@@ -79,7 +85,8 @@ export interface FileRoutesByFullPath {
   '/notifications': typeof MainLayoutNotificationsRoute
   '/trending': typeof MainLayoutTrendingRoute
   '/': typeof MainLayoutIndexRoute
-  '/post/id': typeof MainLayoutPostIdRoute
+  '/post/$postId': typeof MainLayoutPostPostIdRoute
+  '/profile/$userId': typeof MainLayoutProfileUserIdRoute
 }
 export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
@@ -90,7 +97,8 @@ export interface FileRoutesByTo {
   '/notifications': typeof MainLayoutNotificationsRoute
   '/trending': typeof MainLayoutTrendingRoute
   '/': typeof MainLayoutIndexRoute
-  '/post/id': typeof MainLayoutPostIdRoute
+  '/post/$postId': typeof MainLayoutPostPostIdRoute
+  '/profile/$userId': typeof MainLayoutProfileUserIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -103,7 +111,8 @@ export interface FileRoutesById {
   '/_mainLayout/notifications': typeof MainLayoutNotificationsRoute
   '/_mainLayout/trending': typeof MainLayoutTrendingRoute
   '/_mainLayout/': typeof MainLayoutIndexRoute
-  '/_mainLayout/post/id': typeof MainLayoutPostIdRoute
+  '/_mainLayout/post/$postId': typeof MainLayoutPostPostIdRoute
+  '/_mainLayout/profile/$userId': typeof MainLayoutProfileUserIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -116,7 +125,8 @@ export interface FileRouteTypes {
     | '/notifications'
     | '/trending'
     | '/'
-    | '/post/id'
+    | '/post/$postId'
+    | '/profile/$userId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/auth'
@@ -127,7 +137,8 @@ export interface FileRouteTypes {
     | '/notifications'
     | '/trending'
     | '/'
-    | '/post/id'
+    | '/post/$postId'
+    | '/profile/$userId'
   id:
     | '__root__'
     | '/_mainLayout'
@@ -139,7 +150,8 @@ export interface FileRouteTypes {
     | '/_mainLayout/notifications'
     | '/_mainLayout/trending'
     | '/_mainLayout/'
-    | '/_mainLayout/post/id'
+    | '/_mainLayout/post/$postId'
+    | '/_mainLayout/profile/$userId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -212,11 +224,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MainLayoutBookmarksRouteImport
       parentRoute: typeof MainLayoutRoute
     }
-    '/_mainLayout/post/id': {
-      id: '/_mainLayout/post/id'
-      path: '/post/id'
-      fullPath: '/post/id'
-      preLoaderRoute: typeof MainLayoutPostIdRouteImport
+    '/_mainLayout/profile/$userId': {
+      id: '/_mainLayout/profile/$userId'
+      path: '/profile/$userId'
+      fullPath: '/profile/$userId'
+      preLoaderRoute: typeof MainLayoutProfileUserIdRouteImport
+      parentRoute: typeof MainLayoutRoute
+    }
+    '/_mainLayout/post/$postId': {
+      id: '/_mainLayout/post/$postId'
+      path: '/post/$postId'
+      fullPath: '/post/$postId'
+      preLoaderRoute: typeof MainLayoutPostPostIdRouteImport
       parentRoute: typeof MainLayoutRoute
     }
   }
@@ -230,7 +249,8 @@ interface MainLayoutRouteChildren {
   MainLayoutNotificationsRoute: typeof MainLayoutNotificationsRoute
   MainLayoutTrendingRoute: typeof MainLayoutTrendingRoute
   MainLayoutIndexRoute: typeof MainLayoutIndexRoute
-  MainLayoutPostIdRoute: typeof MainLayoutPostIdRoute
+  MainLayoutPostPostIdRoute: typeof MainLayoutPostPostIdRoute
+  MainLayoutProfileUserIdRoute: typeof MainLayoutProfileUserIdRoute
 }
 
 const MainLayoutRouteChildren: MainLayoutRouteChildren = {
@@ -241,7 +261,8 @@ const MainLayoutRouteChildren: MainLayoutRouteChildren = {
   MainLayoutNotificationsRoute: MainLayoutNotificationsRoute,
   MainLayoutTrendingRoute: MainLayoutTrendingRoute,
   MainLayoutIndexRoute: MainLayoutIndexRoute,
-  MainLayoutPostIdRoute: MainLayoutPostIdRoute,
+  MainLayoutPostPostIdRoute: MainLayoutPostPostIdRoute,
+  MainLayoutProfileUserIdRoute: MainLayoutProfileUserIdRoute,
 }
 
 const MainLayoutRouteWithChildren = MainLayoutRoute._addFileChildren(

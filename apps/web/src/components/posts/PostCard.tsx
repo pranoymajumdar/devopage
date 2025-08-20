@@ -1,5 +1,5 @@
 import type { TPost } from "@server/db/schema";
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { formatDistanceToNow } from "date-fns";
 import {
   LucideArchive,
@@ -20,10 +20,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { cn } from "@/lib/utils";
 import { useDeletePost } from "@/services/posts";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { Button, buttonVariants } from "../ui/button";
+import { Button } from "../ui/button";
 import { Skeleton } from "../ui/skeleton";
 
 function PostActionMenu({ children, post }: { children: ReactNode; post: TPost }) {
@@ -93,6 +92,7 @@ export function PostCardSkeleton() {
 }
 
 export function PostCard({ post }: { post: TPost }) {
+  const navigate = useNavigate();
   return (
     <Link
       to="/post/$postId"
@@ -111,16 +111,20 @@ export function PostCard({ post }: { post: TPost }) {
           </Avatar>
           <div className="flex-1 space-y-1">
             <div className="flex items-center gap-2">
-              <Link
-                to="/profile/$userId"
-                params={{ userId: post.authorId }}
-                className={cn(
-                  buttonVariants({ variant: "link", size: "sm" }),
-                  "m-0 cursor-pointer p-0",
-                )}
+              <Button
+                variant="link"
+                size="sm"
+                className="m-0 cursor-pointer p-0"
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigate({
+                    to: "/profile/$userId",
+                    params: { userId: post.authorId },
+                  });
+                }}
               >
                 {post.author.name}
-              </Link>
+              </Button>
               <span className="text-muted-foreground text-xs">
                 {formatDistanceToNow(post.createdAt)}
               </span>

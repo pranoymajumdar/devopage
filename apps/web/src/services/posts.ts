@@ -9,7 +9,7 @@ export function usePosts() {
   return useSuspenseQuery({
     queryKey: POSTS_QUERY_KEY,
     queryFn: async () => {
-      const res = await api.get<TPost[]>("/posts/all");
+      const res = await api.get<TPost[]>("/api/posts/all");
       return res.data;
     },
   });
@@ -19,7 +19,7 @@ export function useCreatePost() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async ({ values }: { values: TCreatePostSchema }) => {
-      const res = await api.post<TNewPost>("/posts", values);
+      const res = await api.post<TNewPost>("/api/posts", values);
       return res.data;
     },
     onSuccess: () => {
@@ -34,7 +34,7 @@ export function useDeletePost() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async ({ values }: { values: TDeletePostSchema }) => {
-      const res = await api.delete<string>("/posts", {
+      const res = await api.delete<string>("/api/posts", {
         data: values,
       });
 

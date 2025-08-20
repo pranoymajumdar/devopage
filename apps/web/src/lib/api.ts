@@ -1,5 +1,4 @@
 import axios from "axios";
-import { env } from "./env";
 
 export class ApiError extends Error {
   status?: number;
@@ -11,7 +10,6 @@ export class ApiError extends Error {
 }
 
 export const api = axios.create({
-  baseURL: env.VITE_SERVER_URL,
   headers: {
     "Content-Type": "application/json",
   },

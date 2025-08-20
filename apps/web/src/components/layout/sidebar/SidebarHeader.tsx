@@ -1,7 +1,7 @@
 import { LucideCode2, LucidePlus } from "lucide-react";
 import { CreatePostDialog } from "@/components/posts/CreatePostDialog";
 import { Button } from "@/components/ui/button";
-import { authClient } from "@/lib/auth-client";
+import { authClient } from "@/lib/authClient";
 
 export function SidebarHeader() {
   const { data: getSession, isPending } = authClient.useSession();
